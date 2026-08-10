@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Khairul Ramadhan — IT Staff & Web Enthusiast</title>
+  <meta name="description" content="Portfolio of Khairul Ramadhan — IT Staff, Technical Support, and Web Enthusiast based in Central Jakarta." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            emerald: {
+              950: '#022c22',
+              900: '#064e3b',
+              800: '#065f46',
+              700: '#047857',
+              600: '#059669',
+              500: '#10b981',
+              400: '#34d399',
+              100: '#d1fae5',
+              50:  '#ecfdf5',
+            },
+            gold: {
+              DEFAULT: '#B7950B',
+              light:   '#D4A017',
+              dark:    '#8B6914',
+              50:      '#fefce8',
+              100:     '#fef9c3',
+            }
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; }
+    /* Custom gradient hero background */
+    .hero-bg {
+      background: radial-gradient(ellipse at 70% 50%, rgba(6,79,59,0.08) 0%, transparent 60%),
+                  radial-gradient(ellipse at 20% 80%, rgba(183,149,11,0.06) 0%, transparent 50%),
+                  linear-gradient(135deg, #f0faf5 0%, #f8faf8 50%, #fefce8 100%);
+    }
+    /* Glassmorphism navbar */
+    .navbar-glass {
+      background: rgba(255,255,255,0.82);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    /* Animated underline nav link */
+    .nav-link {
+      position: relative;
+      transition: color 0.2s;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0;
+      width: 0; height: 2px;
+      background: #064e3b;
+      transition: width 0.25s ease;
+      border-radius: 2px;
+    }
+    .nav-link:hover::after,
+    .nav-link.active::after { width: 100%; }
+    .nav-link.active { color: #064e3b; font-weight: 600; }
+    /* Geometric pattern overlay */
+    .hero-pattern {
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23064e3b' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    /* Scroll fade-in animation */
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Timeline connector */
+    .timeline-line {
+      position: absolute;
+      left: 18px; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, #064e3b, #B7950B, #064e3b);
+    }
+    /* Card hover */
+    .card-hover {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(6,79,59,0.12);
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900 antialiased" x-data="portfolioApp()">
+
+  <!-- ===== STICKY NAVBAR ===== -->
+  <nav class="navbar-glass fixed top-0 left-0 right-0 z-50 border-b border-gray-100 shadow-sm" aria-label="Main navigation">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+
+        <!-- Logo / Name -->
+        <a href="#hero" class="flex items-center gap-2 group">
+          <span class="w-8 h-8 rounded-lg bg-emerald-900 flex items-center justify-center text-white font-bold text-sm group-hover:bg-gold transition-colors duration-200">KR</span>
+          <span class="font-bold text-gray-900 text-base tracking-tight">Khairul <span class="text-emerald-900">Ramadhan</span></span>
+        </a>
+
+        <!-- Desktop Nav Links -->
+        <div class="hidden md:flex items-center gap-7">
+          <a href="#about"      class="nav-link text-sm font-medium text-gray-600 hover:text-emerald-900 pb-1" :class="{'active': activeSection==='about'}">About</a>
+          <a href="#experience" class="nav-link text-sm font-medium text-gray-600 hover:text-emerald-900 pb-1" :class="{'active': activeSection==='experience'}">Experience</a>
+          <a href="#skills"     class="nav-link text-sm font-medium text-gray-600 hover:text-emerald-900 pb-1" :class="{'active': activeSection==='skills'}">Skills</a>
+          <a href="#education"  class="nav-link text-sm font-medium text-gray-600 hover:text-emerald-900 pb-1" :class="{'active': activeSection==='education'}">Education</a>
+          <a href="#contact"    class="nav-link text-sm font-medium text-gray-600 hover:text-emerald-900 pb-1" :class="{'active': activeSection==='contact'}">Contact</a>
+        </div>
+
+        <!-- CTA + Hamburger -->
+        <div class="flex items-center gap-3">
+          <a href="#contact" class="hidden md:inline-flex items-center gap-2 bg-emerald-900 text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-emerald-800 transition-colors duration-200 shadow-sm">
+            <i class="fa-regular fa-paper-plane text-xs"></i> Hire Me
+          </a>
+          <!-- Mobile hamburger -->
+          <button @click="mobileOpen = !mobileOpen" class="md:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors" aria-label="Toggle menu">
+            <i class="fa-solid fa-bars text-lg" x-show="!mobileOpen"></i>
+            <i class="fa-solid fa-xmark text-lg" x-show="mobileOpen" x-cloak></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div x-show="mobileOpen" x-cloak
+         x-transition:enter="transition ease-out duration-200"
+         x-transition:enter-start="opacity-0 -translate-y-2"
+         x-transition:enter-end="opacity-100 translate-y-0"
+         x-transition:leave="transition ease-in duration-150"
+         x-transition:leave-start="opacity-100 translate-y-0"
+         x-transition:leave-end="opacity-0 -translate-y-2"
+         class="md:hidden border-t border-gray-100 bg-white/95 backdrop-blur-md px-4 pb-5 pt-3 space-y-1">
+      <a href="#about"      @click="mobileOpen=false" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-gray-700 hover:bg-emerald-50 hover:text-emerald-900 transition-colors">About</a>
+      <a href="#experience" @click="mobileOpen=false" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-gray-700 hover:bg-emerald-50 hover:text-emerald-900 transition-colors">Experience</a>
+      <a href="#skills"     @click="mobileOpen=false" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-gray-700 hover:bg-emerald-50 hover:text-emerald-900 transition-colors">Skills</a>
+      <a href="#education"  @click="mobileOpen=false" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-gray-700 hover:bg-emerald-50 hover:text-emerald-900 transition-colors">Education</a>
+      <a href="#contact"    @click="mobileOpen=false" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-gray-700 hover:bg-emerald-50 hover:text-emerald-900 transition-colors">Contact</a>
+      <div class="pt-2">
+        <a href="#contact" @click="mobileOpen=false" class="flex items-center justify-center gap-2 bg-emerald-900 text-white text-sm font-semibold px-4 py-2.5 rounded-lg hover:bg-emerald-800 transition-colors w-full">
+          <i class="fa-regular fa-paper-plane text-xs"></i> Hire Me
+        </a>
+      </div>
+    </div>
+  </nav>
+  <!-- END NAVBAR -->
+
+  <!-- ===== HERO SECTION ===== -->
+  <section id="hero" class="hero-bg hero-pattern min-h-screen flex items-center pt-16" aria-label="Hero introduction">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
+      <div class="max-w-3xl mx-auto text-center">
+
+        <!-- Status badge -->
+        <div class="inline-flex items-center gap-2 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold px-3 py-1.5 rounded-full mb-8 fade-in-up">
+          <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+          Available for new opportunities
+        </div>
+
+        <!-- Main tagline -->
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-5 fade-in-up">
+          Keeping Systems Running.<br/>
+          <span class="text-emerald-900">Making Brands</span>
+          <span class="text-gold"> Look Great.</span>
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="text-lg sm:text-xl text-gray-500 font-medium mb-4 fade-in-up">
+          IT Staff & Technical Support <span class="text-gray-300 mx-2">|</span> Web Enthusiast
+        </p>
+
+        <!-- Bio -->
+        <p class="text-base text-gray-600 leading-relaxed max-w-2xl mx-auto mb-10 fade-in-up">
+          IT professional with hands-on experience in hardware/software troubleshooting, system configuration, 
+          event technical support, and visual design — bridging operational reliability with creative execution.
+        </p>
+
+        <!-- Dual CTAs -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 fade-in-up">
+          <a href="#contact" class="flex items-center gap-2 bg-emerald-900 text-white font-semibold px-7 py-3.5 rounded-xl hover:bg-emerald-800 hover:-translate-y-0.5 transition-all duration-200 shadow-lg shadow-emerald-900/20 w-full sm:w-auto justify-center">
+            <i class="fa-solid fa-envelope text-sm"></i>
+            Contact Me
+          </a>
+          <a href="#experience" class="flex items-center gap-2 border-2 border-emerald-900 text-emerald-900 font-semibold px-7 py-3.5 rounded-xl hover:bg-emerald-900 hover:text-white hover:-translate-y-0.5 transition-all duration-200 w-full sm:w-auto justify-center">
+            <i class="fa-solid fa-briefcase text-sm"></i>
+            View Experience
+          </a>
+        </div>
+
+        <!-- Quick stats row -->
+        <div class="mt-16 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl mx-auto fade-in-up">
+          <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100 text-center card-hover">
+            <div class="text-2xl font-extrabold text-emerald-900">2+</div>
+            <div class="text-xs text-gray-500 font-medium mt-0.5">Years Experience</div>
+          </div>
+          <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100 text-center card-hover">
+            <div class="text-2xl font-extrabold text-gold">3.65</div>
+            <div class="text-xs text-gray-500 font-medium mt-0.5">Bachelor GPA</div>
+          </div>
+          <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100 text-center card-hover">
+            <div class="text-2xl font-extrabold text-gold">3.67</div>
+            <div class="text-xs text-gray-500 font-medium mt-0.5">Diploma GPA</div>
+          </div>
+          <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100 text-center card-hover">
+            <div class="text-2xl font-extrabold text-emerald-900">6+</div>
+            <div class="text-xs text-gray-500 font-medium mt-0.5">Soft Skills</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- END HERO -->
+
+  <!-- ===== ABOUT ME SECTION ===== -->
+  <section id="about" class="py-20 bg-white" aria-label="About me">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Section header -->
+      <div class="text-center mb-14 fade-in-up">
+        <span class="inline-block text-xs font-bold uppercase tracking-widest text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full mb-3">About Me</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900">A bit about who I am</h2>
+      </div>
+
+      <!-- Two-column layout -->
+      <div class="grid lg:grid-cols-2 gap-12 items-start">
+
+        <!-- Left — Profile summary -->
+        <div class="fade-in-up">
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-16 h-16 rounded-2xl bg-emerald-900 flex items-center justify-center text-white text-2xl font-extrabold shadow-lg">KR</div>
+            <div>
+              <h3 class="text-xl font-bold text-gray-900">Khairul Ramadhan</h3>
+              <p class="text-sm text-emerald-700 font-medium">IT Staff & Technical Support</p>
+            </div>
+          </div>
+          <p class="text-gray-600 leading-relaxed text-base mb-6">
+            IT professional with solid experience as an IT Support, handling everything from hardware/software
+            troubleshooting to system installation and event technical readiness. I complement my technical
+            background with a genuine interest in web development and visual design — making me equally
+            comfortable in the server room and the creative studio.
+          </p>
+          <p class="text-gray-600 leading-relaxed text-base mb-8">
+            I bring a detail-oriented mindset and strong communication skills to every role, whether I'm
+            resolving a critical device issue, supporting a company event, or designing a marketing visual
+            that represents the brand well.
+          </p>
+
+          <!-- Contact details -->
+          <div class="space-y-3">
+            <div class="flex items-center gap-3 text-sm text-gray-600">
+              <span class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald-700 flex-shrink-0"><i class="fa-solid fa-envelope text-xs"></i></span>
+              <a href="mailto:khairulramaadhan@gmail.com" class="hover:text-emerald-900 transition-colors">khairulramaadhan@gmail.com</a>
+            </div>
+            <div class="flex items-center gap-3 text-sm text-gray-600">
+              <span class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald-700 flex-shrink-0"><i class="fa-solid fa-phone text-xs"></i></span>
+              <a href="tel:+6282184614388" class="hover:text-emerald-900 transition-colors">+62 821-8461-4388</a>
+            </div>
+            <div class="flex items-center gap-3 text-sm text-gray-600">
+              <span class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald-700 flex-shrink-0"><i class="fa-solid fa-location-dot text-xs"></i></span>
+              <span>Central Jakarta, Indonesia</span>
+            </div>
+            <div class="flex items-center gap-3 text-sm text-gray-600">
+              <span class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald-700 flex-shrink-0"><i class="fa-brands fa-linkedin-in text-xs"></i></span>
+              <a href="https://linkedin.com/in/khairulramaadhan" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-900 transition-colors">linkedin.com/in/khairulramaadhan</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right — Stats cards -->
+        <div class="grid grid-cols-2 gap-4 fade-in-up">
+          <div class="bg-emerald-900 text-white rounded-2xl p-6 card-hover shadow-lg shadow-emerald-900/20">
+            <div class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center mb-4">
+              <i class="fa-solid fa-briefcase text-white text-base"></i>
+            </div>
+            <div class="text-3xl font-extrabold mb-1">2+</div>
+            <div class="text-emerald-200 text-sm font-medium">Years of Experience</div>
+          </div>
+          <div class="bg-white border border-gray-100 rounded-2xl p-6 card-hover shadow-sm">
+            <div class="w-10 h-10 bg-gold/10 rounded-xl flex items-center justify-center mb-4">
+              <i class="fa-solid fa-graduation-cap text-gold text-base"></i>
+            </div>
+            <div class="text-3xl font-extrabold text-gold mb-1">3.65</div>
+            <div class="text-gray-500 text-sm font-medium">Bachelor's GPA</div>
+            <div class="text-xs text-gray-400 mt-0.5">Computer Systems</div>
+          </div>
+          <div class="bg-white border border-gray-100 rounded-2xl p-6 card-hover shadow-sm">
+            <div class="w-10 h-10 bg-gold/10 rounded-xl flex items-center justify-center mb-4">
+              <i class="fa-solid fa-award text-gold text-base"></i>
+            </div>
+            <div class="text-3xl font-extrabold text-gold mb-1">3.67</div>
+            <div class="text-gray-500 text-sm font-medium">Diploma GPA</div>
+            <div class="text-xs text-gray-400 mt-0.5">Informatics Engineering</div>
+          </div>
+          <div class="bg-white border border-gray-100 rounded-2xl p-6 card-hover shadow-sm">
+            <div class="w-10 h-10 bg-emerald-50 rounded-xl flex items-center justify-center mb-4">
+              <i class="fa-solid fa-star text-emerald-700 text-base"></i>
+            </div>
+            <div class="text-3xl font-extrabold text-emerald-900 mb-1">6+</div>
+            <div class="text-gray-500 text-sm font-medium">Soft Skills</div>
+            <div class="text-xs text-gray-400 mt-0.5">Communication & Leadership</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- END ABOUT -->
+
+  <!-- ===== EXPERIENCE SECTION ===== -->
+  <section id="experience" class="py-20 bg-[#F8FAF9]" aria-label="Work experience">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Section header -->
+      <div class="text-center mb-14 fade-in-up">
+        <span class="inline-block text-xs font-bold uppercase tracking-widest text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full mb-3">Experience</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900">Work History & Organizations</h2>
+        <p class="text-gray-500 mt-3 max-w-xl mx-auto text-sm">A track record of technical reliability, creative execution, and organizational contribution.</p>
+      </div>
+
+      <!-- Timeline -->
+      <div class="relative max-w-4xl mx-auto">
+        <div class="hidden sm:block timeline-line"></div>
+
+        <!-- Experience 1 -->
+        <div class="relative sm:pl-14 mb-10 fade-in-up">
+          <div class="hidden sm:flex absolute left-0 top-3 w-9 h-9 rounded-full bg-emerald-900 border-4 border-white shadow-md items-center justify-center z-10">
+            <i class="fa-solid fa-desktop text-white text-xs"></i>
+          </div>
+          <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 card-hover">
+            <div class="flex flex-wrap items-start justify-between gap-3 mb-3">
+              <div>
+                <h3 class="text-base font-bold text-gray-900">IT Support</h3>
+                <p class="text-sm text-emerald-700 font-semibold">PT. Berkat Berlimpah Sukses / Manulife Agency - PIK 2</p>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span class="inline-flex items-center gap-1 bg-emerald-100 text-emerald-800 text-xs font-semibold px-2.5 py-1 rounded-full">
+                  <i class="fa-solid fa-circle text-[6px]"></i> Full Time
+                </span>
+                <span class="text-xs text-gray-400 font-medium bg-gray-50 px-2.5 py-1 rounded-full border border-gray-100">Jun 2024 – Jun 2026</span>
+              </div>
+            </div>
+            <ul class="space-y-1.5 text-sm text-gray-600">
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-600 mt-0.5 flex-shrink-0 text-xs"></i>Windows hardware and software troubleshooting, ensuring minimal operational downtime.</li>
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-600 mt-0.5 flex-shrink-0 text-xs"></i>Printer and peripheral device configuration, maintenance, and repair.</li>
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-600 mt-0.5 flex-shrink-0 text-xs"></i>Event technical support and on-site readiness for company and marketing events.</li>
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-600 mt-0.5 flex-shrink-0 text-xs"></i>Designed internal visual materials in collaboration with the marketing team using Adobe Photoshop and Canva.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Experience 2 -->
+        <div class="relative sm:pl-14 mb-10 fade-in-up">
+          <div class="hidden sm:flex absolute left-0 top-3 w-9 h-9 rounded-full bg-gold border-4 border-white shadow-md items-center justify-center z-10">
+            <i class="fa-solid fa-bullhorn text-white text-xs"></i>
+          </div>
+          <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 card-hover">
+            <div class="flex flex-wrap items-start justify-between gap-3 mb-3">
+              <div>
+                <h3 class="text-base font-bold text-gray-900">Digital Marketing Intern</h3>
+                <p class="text-sm text-gold font-semibold">Baper Cafe — Medan</p>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span class="inline-flex items-center gap-1 bg-yellow-100 text-yellow-800 text-xs font-semibold px-2.5 py-1 rounded-full">
+                  <i class="fa-solid fa-circle text-[6px]"></i> Internship
+                </span>
+                <span class="text-xs text-gray-400 font-medium bg-gray-50 px-2.5 py-1 rounded-full border border-gray-100">Sep – Dec 2023</span>
+              </div>
+            </div>
+            <ul class="space-y-1.5 text-sm text-gray-600">
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-gold mt-0.5 flex-shrink-0 text-xs"></i>Managed social media content planning, creation, and scheduling across platforms.</li>
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-gold mt-0.5 flex-shrink-0 text-xs"></i>Product photography for menu items and promotional materials.</li>
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-gold mt-0.5 flex-shrink-0 text-xs"></i>Designed digital menus and promotional graphics to enhance brand presentation.</li>
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-gold mt-0.5 flex-shrink-0 text-xs"></i>Contributed to digital promotion strategies to increase customer engagement.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Experience 3 -->
+        <div class="relative sm:pl-14 mb-10 fade-in-up">
+          <div class="hidden sm:flex absolute left-0 top-3 w-9 h-9 rounded-full bg-gold border-4 border-white shadow-md items-center justify-center z-10">
+            <i class="fa-solid fa-palette text-white text-xs"></i>
+          </div>
+          <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 card-hover">
+            <div class="flex flex-wrap items-start justify-between gap-3 mb-3">
+              <div>
+                <h3 class="text-base font-bold text-gray-900">Branding Intern</h3>
+                <p class="text-sm text-gold font-semibold">Let's Bake and Cook</p>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span class="inline-flex items-center gap-1 bg-yellow-100 text-yellow-800 text-xs font-semibold px-2.5 py-1 rounded-full">
+                  <i class="fa-solid fa-circle text-[6px]"></i> Internship
+                </span>
+              </div>
+            </div>
+            <ul class="space-y-1.5 text-sm text-gray-600">
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-gold mt-0.5 flex-shrink-0 text-xs"></i>Delivered consistent visual design assets to reinforce and support brand identity.</li>
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-gold mt-0.5 flex-shrink-0 text-xs"></i>Created design materials aligned with the brand's style guide and tone.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Experience 4 -->
+        <div class="relative sm:pl-14 mb-10 fade-in-up">
+          <div class="hidden sm:flex absolute left-0 top-3 w-9 h-9 rounded-full bg-gold border-4 border-white shadow-md items-center justify-center z-10">
+            <i class="fa-solid fa-newspaper text-white text-xs"></i>
+          </div>
+          <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 card-hover">
+            <div class="flex flex-wrap items-start justify-between gap-3 mb-3">
+              <div>
+                <h3 class="text-base font-bold text-gray-900">Advertiser Intern</h3>
+                <p class="text-sm text-gold font-semibold">PT. Harian Tribun Medan</p>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span class="inline-flex items-center gap-1 bg-yellow-100 text-yellow-800 text-xs font-semibold px-2.5 py-1 rounded-full">
+                  <i class="fa-solid fa-circle text-[6px]"></i> Internship
+                </span>
+                <span class="text-xs text-gray-400 font-medium bg-gray-50 px-2.5 py-1 rounded-full border border-gray-100">Jul 2023</span>
+              </div>
+            </div>
+            <ul class="space-y-1.5 text-sm text-gray-600">
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-gold mt-0.5 flex-shrink-0 text-xs"></i>Designed promotional flyers for print and digital distribution.</li>
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-gold mt-0.5 flex-shrink-0 text-xs"></i>Edited marketing videos to support advertising campaigns.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Organization -->
+        <div class="relative sm:pl-14 fade-in-up">
+          <div class="hidden sm:flex absolute left-0 top-3 w-9 h-9 rounded-full bg-blue-600 border-4 border-white shadow-md items-center justify-center z-10">
+            <i class="fa-solid fa-users text-white text-xs"></i>
+          </div>
+          <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 card-hover">
+            <div class="flex flex-wrap items-start justify-between gap-3 mb-3">
+              <div>
+                <h3 class="text-base font-bold text-gray-900">Head Committee</h3>
+                <p class="text-sm text-blue-600 font-semibold">Informatics Engineering New Student Orientation</p>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span class="inline-flex items-center gap-1 bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-1 rounded-full">
+                  <i class="fa-solid fa-circle text-[6px]"></i> Organizational
+                </span>
+                <span class="text-xs text-gray-400 font-medium bg-gray-50 px-2.5 py-1 rounded-full border border-gray-100">2020 – 2021</span>
+              </div>
+            </div>
+            <ul class="space-y-1.5 text-sm text-gray-600">
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-blue-500 mt-0.5 flex-shrink-0 text-xs"></i>Led the committee for the Informatics Engineering department's new student orientation program.</li>
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-blue-500 mt-0.5 flex-shrink-0 text-xs"></i>Coordinated team efforts, logistics, and event planning for a successful orientation experience.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- END EXPERIENCE -->
+
+  <!-- ===== SKILLS SECTION ===== -->
+  <section id="skills" class="py-20 bg-white" aria-label="Skills and tools">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Section header -->
+      <div class="text-center mb-14 fade-in-up">
+        <span class="inline-block text-xs font-bold uppercase tracking-widest text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full mb-3">Skills</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900">What I Bring to the Table</h2>
+        <p class="text-gray-500 mt-3 max-w-xl mx-auto text-sm">A balanced mix of technical depth and human-centered soft skills.</p>
+      </div>
+
+      <!-- Three column grid -->
+      <div class="grid md:grid-cols-3 gap-8">
+
+        <!-- Hard Skills -->
+        <div class="bg-[#F8FAF9] rounded-2xl p-7 border border-gray-100 fade-in-up card-hover">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 bg-emerald-900 rounded-xl flex items-center justify-center shadow">
+              <i class="fa-solid fa-screwdriver-wrench text-white text-sm"></i>
+            </div>
+            <h3 class="font-bold text-gray-900 text-base">Hard Skills</h3>
+          </div>
+          <div class="flex flex-wrap gap-2.5">
+            <span class="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-semibold px-3 py-1.5 rounded-full"><i class="fa-solid fa-microchip text-[10px]"></i> Hardware Troubleshooting</span>
+            <span class="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-semibold px-3 py-1.5 rounded-full"><i class="fa-solid fa-bug text-[10px]"></i> Software Troubleshooting</span>
+            <span class="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-semibold px-3 py-1.5 rounded-full"><i class="fa-solid fa-download text-[10px]"></i> System Installation</span>
+            <span class="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-semibold px-3 py-1.5 rounded-full"><i class="fa-solid fa-gear text-[10px]"></i> Device Configuration</span>
+            <span class="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-semibold px-3 py-1.5 rounded-full"><i class="fa-solid fa-headset text-[10px]"></i> IT Support (Office & Event)</span>
+            <span class="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-semibold px-3 py-1.5 rounded-full"><i class="fa-brands fa-html5 text-[10px]"></i> HTML & CSS</span>
+            <span class="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-semibold px-3 py-1.5 rounded-full"><i class="fa-solid fa-database text-[10px]"></i> MySQL</span>
+          </div>
+        </div>
+
+        <!-- Soft Skills -->
+        <div class="bg-[#F8FAF9] rounded-2xl p-7 border border-gray-100 fade-in-up card-hover">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 bg-gold rounded-xl flex items-center justify-center shadow">
+              <i class="fa-solid fa-brain text-white text-sm"></i>
+            </div>
+            <h3 class="font-bold text-gray-900 text-base">Soft Skills</h3>
+          </div>
+          <div class="flex flex-wrap gap-2.5">
+            <span class="inline-flex items-center gap-1.5 bg-yellow-50 text-yellow-800 border border-yellow-200 text-xs font-semibold px-3 py-1.5 rounded-full"><i class="fa-solid fa-magnifying-glass text-[10px]"></i> Detail-Oriented</span>
+            <span class="inline-flex items-center gap-1.5 bg-yellow-50 text-yellow-800 border border-yellow-200 text-xs font-semibold px-3 py-1.5 rounded-full"><i class="fa-solid fa-bolt text-[10px]"></i> Fast Learner</span>
+            <span class="inline-flex items-center gap-1.5 bg-yellow-50 text-yellow-800 border border-yellow-200 text-xs font-semibold px-3 py-1.5 rounded-full"><i class="fa-solid fa-people-group text-[10px]"></i> Team Worker</span>
+            <span class="inline-flex items-center gap-1.5 bg-yellow-50 text-yellow-800 border border-yellow-200 text-xs font-semibold px-3 py-1.5 rounded-full"><i class="fa-solid fa-person text-[10px]"></i> Individual Worker</span>
+            <span class="inline-flex items-center gap-1.5 bg-yellow-50 text-yellow-800 border border-yellow-200 text-xs font-semibold px-3 py-1.5 rounded-full"><i class="fa-solid fa-comments text-[10px]"></i> Effective Communication</span>
+            <span class="inline-flex items-center gap-1.5 bg-yellow-50 text-yellow-800 border border-yellow-200 text-xs font-semibold px-3 py-1.5 rounded-full"><i class="fa-regular fa-clock text-[10px]"></i> Time Management</span>
+            <span class="inline-flex items-center gap-1.5 bg-yellow-50 text-yellow-800 border border-yellow-200 text-xs font-semibold px-3 py-1.5 rounded-full"><i class="fa-solid fa-arrows-rotate text-[10px]"></i> Adaptable</span>
+          </div>
+        </div>
+
+        <!-- Software & Languages -->
+        <div class="bg-[#F8FAF9] rounded-2xl p-7 border border-gray-100 fade-in-up card-hover">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center shadow">
+              <i class="fa-solid fa-layer-group text-white text-sm"></i>
+            </div>
+            <h3 class="font-bold text-gray-900 text-base">Software & Languages</h3>
+          </div>
+          <div class="flex flex-wrap gap-2.5">
+            <span class="inline-flex items-center gap-1.5 bg-blue-50 text-blue-800 border border-blue-200 text-xs font-semibold px-3 py-1.5 rounded-full"><i class="fa-brands fa-windows text-[10px]"></i> Microsoft Office</span>
+            <span class="inline-flex items-center gap-1.5 bg-rose-50 text-rose-800 border border-rose-200 text-xs font-semibold px-3 py-1.5 rounded-full"><i class="fa-solid fa-wand-magic-sparkles text-[10px]"></i> Adobe Photoshop</span>
+            <span class="inline-flex items-center gap-1.5 bg-violet-50 text-violet-800 border border-violet-200 text-xs font-semibold px-3 py-1.5 rounded-full"><i class="fa-brands fa-figma text-[10px]"></i> Figma</span>
+            <span class="inline-flex items-center gap-1.5 bg-sky-50 text-sky-800 border border-sky-200 text-xs font-semibold px-3 py-1.5 rounded-full"><i class="fa-solid fa-pen-nib text-[10px]"></i> Canva</span>
+            <span class="inline-flex items-center gap-1.5 bg-blue-50 text-blue-800 border border-blue-200 text-xs font-semibold px-3 py-1.5 rounded-full"><i class="fa-solid fa-code text-[10px]"></i> VS Code</span>
+            <span class="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-semibold px-3 py-1.5 rounded-full"><i class="fa-solid fa-language text-[10px]"></i> Indonesian (Native)</span>
+            <span class="inline-flex items-center gap-1.5 bg-gray-100 text-gray-700 border border-gray-200 text-xs font-semibold px-3 py-1.5 rounded-full"><i class="fa-solid fa-language text-[10px]"></i> English</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- END SKILLS -->
+
+  <!-- ===== EDUCATION SECTION ===== -->
+  <section id="education" class="py-20 bg-[#F8FAF9]" aria-label="Education">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Section header -->
+      <div class="text-center mb-14 fade-in-up">
+        <span class="inline-block text-xs font-bold uppercase tracking-widest text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full mb-3">Education</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900">Academic Background</h2>
+        <p class="text-gray-500 mt-3 max-w-xl mx-auto text-sm">Strong academic foundation in computer science and informatics engineering.</p>
+      </div>
+
+      <!-- Education cards -->
+      <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+
+        <!-- Bachelor -->
+        <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 card-hover fade-in-up">
+          <div class="flex items-start justify-between gap-4 mb-5">
+            <div class="w-12 h-12 bg-emerald-900 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-emerald-900/20">
+              <i class="fa-solid fa-university text-white text-base"></i>
+            </div>
+            <span class="inline-flex items-center gap-1 bg-emerald-900 text-white text-xs font-bold px-3 py-1.5 rounded-full">
+              GPA 3.65
+            </span>
+          </div>
+          <div class="mb-1">
+            <span class="text-xs font-bold text-gold uppercase tracking-wide">Bachelor's Degree (S1)</span>
+          </div>
+          <h3 class="text-lg font-extrabold text-gray-900 mb-1">Computer Systems</h3>
+          <p class="text-sm font-semibold text-emerald-700 mb-3">Universitas Pembangunan Panca Budi</p>
+          <div class="flex items-center gap-2 text-xs text-gray-400">
+            <i class="fa-regular fa-calendar"></i>
+            <span>Completed</span>
+          </div>
+          <div class="mt-4 pt-4 border-t border-gray-50">
+            <div class="flex items-center gap-2 text-sm text-gray-500">
+              <i class="fa-solid fa-map-marker-alt text-emerald-600 text-xs"></i>
+              <span>Medan, North Sumatra</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Diploma -->
+        <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 card-hover fade-in-up">
+          <div class="flex items-start justify-between gap-4 mb-5">
+            <div class="w-12 h-12 bg-gold rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-gold/20">
+              <i class="fa-solid fa-graduation-cap text-white text-base"></i>
+            </div>
+            <span class="inline-flex items-center gap-1 bg-emerald-900 text-white text-xs font-bold px-3 py-1.5 rounded-full">
+              GPA 3.67
+            </span>
+          </div>
+          <div class="mb-1">
+            <span class="text-xs font-bold text-gold uppercase tracking-wide">Diploma (D3)</span>
+          </div>
+          <h3 class="text-lg font-extrabold text-gray-900 mb-1">Informatics Engineering</h3>
+          <p class="text-sm font-semibold text-emerald-700 mb-3">Universitas Sumatera Utara</p>
+          <div class="flex items-center gap-2 text-xs text-gray-400">
+            <i class="fa-regular fa-calendar"></i>
+            <span>Completed</span>
+          </div>
+          <div class="mt-4 pt-4 border-t border-gray-50">
+            <div class="flex items-center gap-2 text-sm text-gray-500">
+              <i class="fa-solid fa-map-marker-alt text-emerald-600 text-xs"></i>
+              <span>Medan, North Sumatra</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- END EDUCATION -->
+
+  <!-- ===== CONTACT SECTION ===== -->
+  <section id="contact" class="py-24 bg-emerald-950" aria-label="Contact">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center fade-in-up">
+
+      <!-- Label -->
+      <span class="inline-block text-xs font-bold uppercase tracking-widest text-emerald-400 bg-emerald-900/60 px-3 py-1 rounded-full mb-6">Let's Connect</span>
+
+      <!-- Headline -->
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-5 leading-tight">
+        Let's work together.
+      </h2>
+
+      <!-- Subtext -->
+      <p class="text-emerald-200 text-base sm:text-lg max-w-xl mx-auto mb-10 leading-relaxed">
+        Whether you need reliable IT support, a sharp technical eye, or creative visual design —
+        I'm ready to bring value to your team or project.
+      </p>
+
+      <!-- CTA Buttons -->
+     <!--
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14">
+        <a href="mailto:khairulramaadhan@gmail.com"
+           class="flex items-center gap-2.5 bg-gold text-white font-bold px-8 py-4 rounded-xl hover:bg-gold-light hover:-translate-y-1 transition-all duration-200 shadow-lg shadow-gold/30 w-full sm:w-auto justify-center text-base">
+          <i class="fa-solid fa-envelope"></i>
+          Email Me -->
+        </a>
+        <a href="https://linkedin.com/in/khairulramaadhan" target="_blank" rel="noopener noreferrer"
+           class="flex items-center gap-2.5 border-2 border-white/30 text-white font-bold px-8 py-4 rounded-xl hover:bg-white/10 hover:border-white/60 hover:-translate-y-1 transition-all duration-200 w-full sm:w-auto justify-center text-base">
+          <i class="fa-brands fa-linkedin-in"></i>
+          LinkedIn
+        </a>
+      </div>
+
+      <!-- Contact info chips -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-emerald-300 text-sm">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-phone text-emerald-400 text-xs"></i>
+          <a href="tel:+6282184614388" class="hover:text-white transition-colors">+62 821-8461-4388</a>
+        </div>
+        <div class="hidden sm:block w-px h-4 bg-emerald-700"></div>
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-location-dot text-emerald-400 text-xs"></i>
+          <span>Central Jakarta, Indonesia</span>
+        </div>
+        <div class="hidden sm:block w-px h-4 bg-emerald-700"></div>
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-envelope text-emerald-400 text-xs"></i>
+          <a href="mailto:khairulramaadhan@gmail.com" class="hover:text-white transition-colors">khairulramaadhan@gmail.com</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <!-- END CONTACT -->
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="bg-emerald-950 border-t border-emerald-900/60 py-8" aria-label="Footer">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-2">
+          <span class="w-7 h-7 rounded-md bg-emerald-800 flex items-center justify-center text-white text-xs font-bold">KR</span>
+          <span class="text-white font-semibold text-sm">Khairul Ramadhan</span>
+        </div>
+        <p class="text-emerald-400 text-xs text-center">
+          &copy; 2025 Khairul Ramadhan. All rights reserved.
+        </p>
+        <div class="flex items-center gap-3">
+          
+          <a href="https://linkedin.com/in/khairulramaadhan" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="w-8 h-8 rounded-lg bg-emerald-800 flex items-center justify-center text-emerald-300 hover:bg-gold hover:text-white transition-all duration-200">
+            <i class="fa-brands fa-linkedin-in text-xs"></i>
+          </a>
+          <a href="tel:+6282184614388" aria-label="Phone" class="w-8 h-8 rounded-lg bg-emerald-800 flex items-center justify-center text-emerald-300 hover:bg-gold hover:text-white transition-all duration-200">
+            <i class="fa-solid fa-phone text-xs"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- END FOOTER -->
+
+  <!-- ===== JAVASCRIPT ===== -->
+  <script>
+    // Alpine.js component
+    function portfolioApp() {
+      return {
+        mobileOpen: false,
+        activeSection: 'hero',
+
+        init() {
+          this.initIntersectionObserver();
+          this.initFadeAnimations();
+        },
+
+        initIntersectionObserver() {
+          const sections = document.querySelectorAll('section[id]');
+          const options = {
+            root: null,
+            rootMargin: '-60px 0px -40% 0px',
+            threshold: 0
+          };
+
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                this.activeSection = entry.target.id;
+              }
+            });
+          }, options);
+
+          sections.forEach(section => observer.observe(section));
+        },
+
+        initFadeAnimations() {
+          const fadeEls = document.querySelectorAll('.fade-in-up');
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+              if (entry.isIntersecting) {
+                // Stagger children of a parent section
+                const delay = Array.from(
+                  entry.target.parentElement?.querySelectorAll('.fade-in-up') || []
+                ).indexOf(entry.target);
+                setTimeout(() => {
+                  entry.target.classList.add('visible');
+                }, Math.min(delay * 80, 400));
+                observer.unobserve(entry.target);
+              }
+            });
+          }, {
+            rootMargin: '0px 0px -60px 0px',
+            threshold: 0.1
+          });
+
+          fadeEls.forEach(el => observer.observe(el));
+        }
+      };
+    }
+  </script>
+</body>
+</html>
