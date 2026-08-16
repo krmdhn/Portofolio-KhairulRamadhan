@@ -123,6 +123,8 @@
           <a href="#about"      class="nav-link text-sm font-medium text-gray-600 hover:text-emerald-900 pb-1" :class="{'active': activeSection==='about'}">About</a>
           <a href="#experience" class="nav-link text-sm font-medium text-gray-600 hover:text-emerald-900 pb-1" :class="{'active': activeSection==='experience'}">Experience</a>
           <a href="#skills"     class="nav-link text-sm font-medium text-gray-600 hover:text-emerald-900 pb-1" :class="{'active': activeSection==='skills'}">Skills</a>
+          <a href="#projects" class="nav-link text-sm font-medium text-gray-600 hover:text-emerald-900 pb-1"
+             :class="{'active': activeSection==='projects'}">Projects</a>
           <a href="#education"  class="nav-link text-sm font-medium text-gray-600 hover:text-emerald-900 pb-1" :class="{'active': activeSection==='education'}">Education</a>
           <a href="#contact"    class="nav-link text-sm font-medium text-gray-600 hover:text-emerald-900 pb-1" :class="{'active': activeSection==='contact'}">Contact</a>
         </div>
@@ -153,6 +155,11 @@
       <a href="#about"      @click="mobileOpen=false" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-gray-700 hover:bg-emerald-50 hover:text-emerald-900 transition-colors">About</a>
       <a href="#experience" @click="mobileOpen=false" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-gray-700 hover:bg-emerald-50 hover:text-emerald-900 transition-colors">Experience</a>
       <a href="#skills"     @click="mobileOpen=false" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-gray-700 hover:bg-emerald-50 hover:text-emerald-900 transition-colors">Skills</a>
+      <a href="#projects" @click="mobileOpen=false"
+         class="block px-3 py-2.5 rounded-lg text-sm font-medium text-gray-700
+                hover:bg-emerald-50 hover:text-emerald-900 transition-colors">
+        Projects
+      </a>
       <a href="#education"  @click="mobileOpen=false" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-gray-700 hover:bg-emerald-50 hover:text-emerald-900 transition-colors">Education</a>
       <a href="#contact"    @click="mobileOpen=false" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-gray-700 hover:bg-emerald-50 hover:text-emerald-900 transition-colors">Contact</a>
       <div class="pt-2">
@@ -549,6 +556,169 @@
   </section>
   <!-- END SKILLS -->
 
+  <!-- ===== PROJECTS SECTION ===== -->
+  <section id="projects" class="py-20 bg-[#F8FAF9]" aria-label="Featured projects"
+           x-data="projectsCarousel()">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Section header -->
+      <div class="text-center mb-14 fade-in-up">
+        <span class="inline-block text-xs font-bold uppercase tracking-widest
+                     text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full mb-3">
+          Projects
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900">
+          Featured Work
+        </h2>
+        <p class="text-gray-500 mt-3 max-w-xl mx-auto text-sm">
+          Karya desain grafis profesional dan materi kampanye visual yang pernah dikerjakan.
+        </p>
+      </div>
+
+      <!-- Carousel wrapper -->
+      <div class="relative fade-in-up"
+           @mouseenter="stopAuto()"
+           @mouseleave="startAuto()">
+
+        <!-- Prev button -->
+        <button @click="manualPrev()"
+                class="absolute -left-4 sm:-left-5 top-1/2 -translate-y-1/2 z-10
+                       w-10 h-10 rounded-full bg-white border border-gray-200 shadow-md
+                       flex items-center justify-center
+                       text-emerald-900 hover:bg-emerald-900 hover:text-white
+                       transition-all duration-200"
+                aria-label="Previous">
+          <i class="fa-solid fa-chevron-left text-sm"></i>
+        </button>
+
+        <!-- Next button -->
+        <button @click="manualNext()"
+                class="absolute -right-4 sm:-right-5 top-1/2 -translate-y-1/2 z-10
+                       w-10 h-10 rounded-full bg-white border border-gray-200 shadow-md
+                       flex items-center justify-center
+                       text-emerald-900 hover:bg-emerald-900 hover:text-white
+                       transition-all duration-200"
+                aria-label="Next">
+          <i class="fa-solid fa-chevron-right text-sm"></i>
+        </button>
+
+        <!-- Track viewport -->
+        <div class="overflow-hidden rounded-2xl mx-1">
+          <!-- Sliding track -->
+          <div class="flex transition-all duration-500 ease-in-out gap-4"
+               :style="`transform: translateX(calc(-${currentIndex * (100 / itemsPerView)}% - ${currentIndex * (16 / itemsPerView)}px))`">
+
+            <!-- Item 1 -->
+            <div class="group relative overflow-hidden rounded-2xl shadow-sm border border-gray-100 bg-white flex-shrink-0"
+                 :style="`width: calc(${100 / itemsPerView}% - ${16 * (itemsPerView - 1) / itemsPerView}px)`">
+              <div class="aspect-square">
+                <img src="assets/Kontes Final Sprint.jpg" alt="Kontes Final Sprint"
+                     class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105">
+                <div class="absolute inset-0 bg-emerald-950/0 group-hover:bg-emerald-950/20 transition-colors duration-500 rounded-2xl"></div>
+              </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="group relative overflow-hidden rounded-2xl shadow-sm border border-gray-100 bg-white flex-shrink-0"
+                 :style="`width: calc(${100 / itemsPerView}% - ${16 * (itemsPerView - 1) / itemsPerView}px)`">
+              <div class="aspect-square">
+                <img src="assets/Final Sprint 26 Sept 25.png" alt="Final Sprint 26 Sept 25"
+                     class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105">
+                <div class="absolute inset-0 bg-emerald-950/0 group-hover:bg-emerald-950/20 transition-colors duration-500 rounded-2xl"></div>
+              </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="group relative overflow-hidden rounded-2xl shadow-sm border border-gray-100 bg-white flex-shrink-0"
+                 :style="`width: calc(${100 / itemsPerView}% - ${16 * (itemsPerView - 1) / itemsPerView}px)`">
+              <div class="aspect-square">
+                <img src="assets/Padel.jpg" alt="Padel Fun Match"
+                     class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105">
+                <div class="absolute inset-0 bg-emerald-950/0 group-hover:bg-emerald-950/20 transition-colors duration-500 rounded-2xl"></div>
+              </div>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="group relative overflow-hidden rounded-2xl shadow-sm border border-gray-100 bg-white flex-shrink-0"
+                 :style="`width: calc(${100 / itemsPerView}% - ${16 * (itemsPerView - 1) / itemsPerView}px)`">
+              <div class="aspect-square">
+                <img src="assets/Genting.jpg" alt="Genting Dream"
+                     class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105">
+                <div class="absolute inset-0 bg-emerald-950/0 group-hover:bg-emerald-950/20 transition-colors duration-500 rounded-2xl"></div>
+              </div>
+            </div>
+
+            <!-- Item 5 -->
+            <div class="group relative overflow-hidden rounded-2xl shadow-sm border border-gray-100 bg-white flex-shrink-0"
+                 :style="`width: calc(${100 / itemsPerView}% - ${16 * (itemsPerView - 1) / itemsPerView}px)`">
+              <div class="aspect-square">
+                <img src="assets/Turkey.jpg" alt="Turkey Promo"
+                     class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105">
+                <div class="absolute inset-0 bg-emerald-950/0 group-hover:bg-emerald-950/20 transition-colors duration-500 rounded-2xl"></div>
+              </div>
+            </div>
+
+            <!-- Item 6 -->
+            <div class="group relative overflow-hidden rounded-2xl shadow-sm border border-gray-100 bg-white flex-shrink-0"
+                 :style="`width: calc(${100 / itemsPerView}% - ${16 * (itemsPerView - 1) / itemsPerView}px)`">
+              <div class="aspect-square">
+                <img src="assets/Eid Adha.jpg" alt="Idul Adha Campaign"
+                     class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105">
+                <div class="absolute inset-0 bg-emerald-950/0 group-hover:bg-emerald-950/20 transition-colors duration-500 rounded-2xl"></div>
+              </div>
+            </div>
+
+            <!-- Item 7 -->
+            <div class="group relative overflow-hidden rounded-2xl shadow-sm border border-gray-100 bg-white flex-shrink-0"
+                 :style="`width: calc(${100 / itemsPerView}% - ${16 * (itemsPerView - 1) / itemsPerView}px)`">
+              <div class="aspect-square">
+                <img src="assets/Waisak.jpg" alt="Waisak Campaign"
+                     class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105">
+                <div class="absolute inset-0 bg-emerald-950/0 group-hover:bg-emerald-950/20 transition-colors duration-500 rounded-2xl"></div>
+              </div>
+            </div>
+
+            <!-- Item 8 -->
+            <div class="group relative overflow-hidden rounded-2xl shadow-sm border border-gray-100 bg-white flex-shrink-0"
+                 :style="`width: calc(${100 / itemsPerView}% - ${16 * (itemsPerView - 1) / itemsPerView}px)`">
+              <div class="aspect-square">
+                <img src="assets/Hari Buruh.jpg" alt="Hari Buruh Campaign"
+                     class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105">
+                <div class="absolute inset-0 bg-emerald-950/0 group-hover:bg-emerald-950/20 transition-colors duration-500 rounded-2xl"></div>
+              </div>
+            </div>
+
+            <!-- Item 9 -->
+            <div class="group relative overflow-hidden rounded-2xl shadow-sm border border-gray-100 bg-white flex-shrink-0"
+                 :style="`width: calc(${100 / itemsPerView}% - ${16 * (itemsPerView - 1) / itemsPerView}px)`">
+              <div class="aspect-square">
+                <img src="assets/Logo C3.png" alt="Logo C3"
+                     class="w-full h-full object-contain p-6 transition-transform duration-500 ease-out group-hover:scale-105">
+                <div class="absolute inset-0 bg-emerald-950/0 group-hover:bg-emerald-950/20 transition-colors duration-500 rounded-2xl"></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Dot indicators -->
+      <div class="flex justify-center gap-2 mt-8">
+        <template x-for="i in (maxIndex() + 1)" :key="i">
+          <button @click="currentIndex = i - 1"
+                  class="rounded-full transition-all duration-300"
+                  :class="currentIndex === i - 1
+                    ? 'w-6 h-2.5 bg-emerald-900'
+                    : 'w-2.5 h-2.5 bg-gray-300 hover:bg-emerald-400'"
+                  :aria-label="`Slide ${i}`">
+          </button>
+        </template>
+      </div>
+
+    </div>
+  </section>
+  <!-- END PROJECTS -->
+
   <!-- ===== EDUCATION SECTION ===== -->
   <section id="education" class="py-20 bg-[#F8FAF9]" aria-label="Education">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -755,6 +925,66 @@
           });
 
           fadeEls.forEach(el => observer.observe(el));
+        }
+      };
+    }
+
+    // Projects carousel component
+    function projectsCarousel() {
+      return {
+        currentIndex: 0,
+        totalItems: 9,
+        itemsPerView: 1,
+        _timer: null,
+
+        init() {
+          this.updateItemsPerView();
+          window.addEventListener('resize', () => this.updateItemsPerView());
+          this.startAuto();
+        },
+
+        startAuto() {
+          this.stopAuto();
+          this._timer = setInterval(() => this.next(), 3000);
+        },
+
+        stopAuto() {
+          if (this._timer) {
+            clearInterval(this._timer);
+            this._timer = null;
+          }
+        },
+
+        updateItemsPerView() {
+          this.itemsPerView = window.innerWidth >= 1024 ? 3 : window.innerWidth >= 640 ? 2 : 1;
+          if (this.currentIndex > this.maxIndex()) {
+            this.currentIndex = this.maxIndex();
+          }
+        },
+
+        maxIndex() {
+          return Math.max(0, this.totalItems - this.itemsPerView);
+        },
+
+        next() {
+          // infinite loop: wrap to 0 when at end
+          this.currentIndex = this.currentIndex >= this.maxIndex() ? 0 : this.currentIndex + 1;
+        },
+
+        prev() {
+          // infinite loop: wrap to maxIndex when at start
+          this.currentIndex = this.currentIndex <= 0 ? this.maxIndex() : this.currentIndex - 1;
+        },
+
+        // call on manual nav so timer resets cleanly
+        manualNext() {
+          this.next();
+          this.startAuto();
+        },
+
+        manualPrev() {
+          this.prev();
+          this.startAuto();
         }
       };
     }

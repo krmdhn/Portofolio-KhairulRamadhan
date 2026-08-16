@@ -1,0 +1,138 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "1. Add project data and carousel state to `portfolioApp()`": [
+      {
+        "executionId": "2f4a6fed-89f3-44e6-8239-adaf3bc3fdcf",
+        "chatSessionId": "sess_68d97a5d-3a7f-43a8-b9fe-83cd15fac8ea",
+        "timestamp": 1786887301086
+      },
+      {
+        "executionId": "2f4a6fed-89f3-44e6-8239-adaf3bc3fdcf",
+        "chatSessionId": "sess_68d97a5d-3a7f-43a8-b9fe-83cd15fac8ea",
+        "timestamp": 1786887313196
+      },
+      {
+        "executionId": "2f4a6fed-89f3-44e6-8239-adaf3bc3fdcf",
+        "chatSessionId": "sess_68d97a5d-3a7f-43a8-b9fe-83cd15fac8ea",
+        "timestamp": 1786887390285
+      }
+    ],
+    "3. Add the Projects section HTML shell and section header": [
+      {
+        "executionId": "2f4a6fed-89f3-44e6-8239-adaf3bc3fdcf",
+        "chatSessionId": "sess_68d97a5d-3a7f-43a8-b9fe-83cd15fac8ea",
+        "timestamp": 1786887302215
+      },
+      {
+        "executionId": "2f4a6fed-89f3-44e6-8239-adaf3bc3fdcf",
+        "chatSessionId": "sess_68d97a5d-3a7f-43a8-b9fe-83cd15fac8ea",
+        "timestamp": 1786887426836
+      },
+      {
+        "executionId": "2f4a6fed-89f3-44e6-8239-adaf3bc3fdcf",
+        "chatSessionId": "sess_68d97a5d-3a7f-43a8-b9fe-83cd15fac8ea",
+        "timestamp": 1786887516517
+      }
+    ],
+    "6. Checkpoint — verify carousel functionality": [
+      {
+        "executionId": "2f4a6fed-89f3-44e6-8239-adaf3bc3fdcf",
+        "chatSessionId": "sess_68d97a5d-3a7f-43a8-b9fe-83cd15fac8ea",
+        "timestamp": 1786887302865
+      },
+      {
+        "executionId": "2f4a6fed-89f3-44e6-8239-adaf3bc3fdcf",
+        "chatSessionId": "sess_68d97a5d-3a7f-43a8-b9fe-83cd15fac8ea",
+        "timestamp": 1786887735706
+      },
+      {
+        "executionId": "2f4a6fed-89f3-44e6-8239-adaf3bc3fdcf",
+        "chatSessionId": "sess_68d97a5d-3a7f-43a8-b9fe-83cd15fac8ea",
+        "timestamp": 1786888396891
+      }
+    ],
+    "8. Write unit tests for DOM structure, design system compliance, and seed data": [
+      {
+        "executionId": "2f4a6fed-89f3-44e6-8239-adaf3bc3fdcf",
+        "chatSessionId": "sess_68d97a5d-3a7f-43a8-b9fe-83cd15fac8ea",
+        "timestamp": 1786887303015
+      },
+      {
+        "executionId": "2f4a6fed-89f3-44e6-8239-adaf3bc3fdcf",
+        "chatSessionId": "sess_68d97a5d-3a7f-43a8-b9fe-83cd15fac8ea",
+        "timestamp": 1786887737493
+      },
+      {
+        "executionId": "2f4a6fed-89f3-44e6-8239-adaf3bc3fdcf",
+        "chatSessionId": "sess_68d97a5d-3a7f-43a8-b9fe-83cd15fac8ea",
+        "timestamp": 1786888397846
+      }
+    ],
+    "9. Final checkpoint — ensure all tests pass": [
+      {
+        "executionId": "2f4a6fed-89f3-44e6-8239-adaf3bc3fdcf",
+        "chatSessionId": "sess_68d97a5d-3a7f-43a8-b9fe-83cd15fac8ea",
+        "timestamp": 1786887303127
+      },
+      {
+        "executionId": "2f4a6fed-89f3-44e6-8239-adaf3bc3fdcf",
+        "chatSessionId": "sess_68d97a5d-3a7f-43a8-b9fe-83cd15fac8ea",
+        "timestamp": 1786888403728
+      },
+      {
+        "executionId": "2f4a6fed-89f3-44e6-8239-adaf3bc3fdcf",
+        "chatSessionId": "sess_68d97a5d-3a7f-43a8-b9fe-83cd15fac8ea",
+        "timestamp": 1786888547221
+      }
+    ],
+    "2. Implement carousel navigation methods in `portfolioApp()`": [
+      {
+        "executionId": "2f4a6fed-89f3-44e6-8239-adaf3bc3fdcf",
+        "chatSessionId": "sess_68d97a5d-3a7f-43a8-b9fe-83cd15fac8ea",
+        "timestamp": 1786887425993
+      },
+      {
+        "executionId": "2f4a6fed-89f3-44e6-8239-adaf3bc3fdcf",
+        "chatSessionId": "sess_68d97a5d-3a7f-43a8-b9fe-83cd15fac8ea",
+        "timestamp": 1786887515653
+      }
+    ],
+    "7. Add Projects navigation links to the Nav_Bar and Mobile_Drawer": [
+      {
+        "executionId": "2f4a6fed-89f3-44e6-8239-adaf3bc3fdcf",
+        "chatSessionId": "sess_68d97a5d-3a7f-43a8-b9fe-83cd15fac8ea",
+        "timestamp": 1786887427647
+      },
+      {
+        "executionId": "2f4a6fed-89f3-44e6-8239-adaf3bc3fdcf",
+        "chatSessionId": "sess_68d97a5d-3a7f-43a8-b9fe-83cd15fac8ea",
+        "timestamp": 1786887517354
+      }
+    ],
+    "4. Build the carousel track and project card template": [
+      {
+        "executionId": "2f4a6fed-89f3-44e6-8239-adaf3bc3fdcf",
+        "chatSessionId": "sess_68d97a5d-3a7f-43a8-b9fe-83cd15fac8ea",
+        "timestamp": 1786887524272
+      },
+      {
+        "executionId": "2f4a6fed-89f3-44e6-8239-adaf3bc3fdcf",
+        "chatSessionId": "sess_68d97a5d-3a7f-43a8-b9fe-83cd15fac8ea",
+        "timestamp": 1786887647705
+      }
+    ],
+    "5. Add Prev/Next arrow buttons and dot indicators to the carousel": [
+      {
+        "executionId": "2f4a6fed-89f3-44e6-8239-adaf3bc3fdcf",
+        "chatSessionId": "sess_68d97a5d-3a7f-43a8-b9fe-83cd15fac8ea",
+        "timestamp": 1786887653664
+      },
+      {
+        "executionId": "2f4a6fed-89f3-44e6-8239-adaf3bc3fdcf",
+        "chatSessionId": "sess_68d97a5d-3a7f-43a8-b9fe-83cd15fac8ea",
+        "timestamp": 1786887700952
+      }
+    ]
+  }
+}
